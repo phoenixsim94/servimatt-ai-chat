@@ -2,6 +2,8 @@
 
 AI-integrated web application for intelligent Servimatt solutions. Built with React, Redux Toolkit, TailwindCSS, Storybook, and Vite.
 
+[![Live Preview](https://img.shields.io/badge/Live%20Preview-Open-blue?style=flat&logo=vercel)](https://servimatt-ai-chat-app.vercel.app/)
+
 ## Features
 
 - **AI Chat Interface**: Interactive chat powered by OpenAI GPT-4o for Servimatt advice

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import { Modal } from './Modal';
@@ -56,33 +56,66 @@ export const Closed: Story = {
   },
 };
 
+interface InteractiveTemplateArgs {
+  isOpen?: boolean;
+}
+
+const InteractiveTemplate = (args: InteractiveTemplateArgs) => {
+  const [open, setOpen] = useState<boolean>(!!args.isOpen);
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+      <Modal
+        children={undefined} {...args}
+        isOpen={open}
+        onClose={() => {
+          action('onClose')();
+          setOpen(false);
+        }} />
+    </div>
+  );
+};
+
 export const Interactive: Story = {
-  render: (args) => {
-    const { useState } = React;
-    const [open, setOpen] = useState<boolean>(!!args.isOpen);
-
-    return (
-      <div>
-        <Button
-          onClick={() => setOpen(true)}
-        >
-          Open Modal
-        </Button>
-
-        <Modal
-          {...args}
-          isOpen={open}
-          onClose={() => {
-            action('onClose')();
-            setOpen(false);
-          }}
-        />
-      </div>
-    );
-  },
+  render: (args) => <InteractiveTemplate {...args} />,
   args: {
     isOpen: false,
     title: 'Interactive Modal',
-    children: <p>Click the button to open this modal, then click outside or press Escape to close.</p>,
+    children: (
+      <p>
+        Click the button to open this modal, then click outside or press Escape
+        to close.
+      </p>
+    ),
   },
 };
+
+// export const Interactive: Story = {
+//   render: (args) => {
+//     const [open, setOpen] = useState<boolean>(!!args.isOpen);
+
+//     return (
+//       <div>
+//         <Button
+//           onClick={() => setOpen(true)}
+//         >
+//           Open Modal
+//         </Button>
+
+//         <Modal
+//           {...args}
+//           isOpen={open}
+//           onClose={() => {
+//             action('onClose')();
+//             setOpen(false);
+//           }}
+//         />
+//       </div>
+//     );
+//   },
+//   args: {
+//     isOpen: false,
+//     title: 'Interactive Modal',
+//     children: <p>Click the button to open this modal, then click outside or press Escape to close.</p>,
+//   },
+// };

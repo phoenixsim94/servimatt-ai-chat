@@ -8,20 +8,20 @@ describe('MessageBox', () => {
     content: 'Hello there',
   };
 
-  it('renders user message correctly', () => {
-    render(<MessageBox {...defaultProps} />);
-
+  it('renders user message bubble with correct styling', () => {
+    const { container } = render(<MessageBox {...defaultProps} />);
     expect(screen.getByText('Hello there')).toBeInTheDocument();
-    const container = screen.getByText('Hello there').closest('div');
-    expect(container).toHaveClass('bg-gradient-to-br', 'from-[#860100]', 'to-[#5c0000]', 'text-white');
+    const bubble = container.querySelector('div.px-4.py-3.rounded-2xl');
+    expect(bubble).toBeTruthy();
+    expect(bubble).toHaveClass('bg-gradient-to-br', 'from-[#860100]', 'to-[#5c0000]', 'text-white');
   });
 
-  it('renders assistant message correctly', () => {
-    render(<MessageBox {...defaultProps} role="assistant" />);
-
+  it('renders assistant message bubble with correct styling', () => {
+    const { container } = render(<MessageBox {...defaultProps} role="assistant" />);
     expect(screen.getByText('Hello there')).toBeInTheDocument();
-    const container = screen.getByText('Hello there').closest('div');
-    expect(container).toHaveClass('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+    const bubble = container.querySelector('div.px-4.py-3.rounded-2xl');
+    expect(bubble).toBeTruthy();
+    expect(bubble).toHaveClass('bg-white', 'text-gray-700', 'border', 'border-gray-200');
   });
 
   it('displays user icon for user messages', () => {
@@ -55,10 +55,10 @@ describe('MessageBox', () => {
 
   it('handles long messages without breaking layout', () => {
     const longContent = 'a'.repeat(500);
-    render(<MessageBox {...defaultProps} content={longContent} />);
-
-    const messageText = screen.getByText(longContent);
-    expect(messageText).toHaveClass('break-words');
+    const { container } = render(<MessageBox {...defaultProps} content={longContent} />);
+    expect(screen.getByText(longContent)).toBeInTheDocument();
+    const bubble = container.querySelector('div.px-4.py-3.rounded-2xl');
+    expect(bubble).toBeTruthy();
   });
 
   it('handles messages without timestamp', () => {

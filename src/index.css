@@ -25,3 +25,10 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(134, 1, 0, 0.8);
 }
+
+/* styles.css or your component-specific CSS file */
+.markdown code {
+  background-color: #e3eaf2; /* Change this to desired background color */
+  padding: 2px 4px; /* Optional: some padding */
+  border-radius: 4px; /* Optional: rounded corners */
+}

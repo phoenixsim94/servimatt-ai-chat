@@ -161,3 +161,9 @@ The application includes comprehensive error handling:
 - Component library and local documentation with Storybook (scripts available in `package.json`)
 - Responsive UI styled with TailwindCSS and built with Vite
 - Supabase and OpenAI integrations wired in `src/lib` and `src/services`
+
+## Updated Features
+
+- Enhanced Message Box: Improved content filtering to better organize and display chat responses.
+    - Automatically detects and highlights code snippets and functions.
+    - Provides cleaner formatting for mixed text and code content.
